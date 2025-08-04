@@ -3,6 +3,7 @@ func Pk = P1;
 macro grad(u)[dx(u), dy(u), dz(u)]// // three-dimensional gradient
 
 macro def(u)u//
+
 {
     macro dimension()3// EOM
     include "macro_ddm.idp"
@@ -12,7 +13,15 @@ macro def(u)u//
 	mpiBarrier(mpiCommWorld);
     if(mpirank == 0) t0 = mpiWtime();
 
-    Th=readmesh3("top-ii-vol-mesh_"+mpirank+".mesh");
+    string testMeshFormat = "msh";
+
+    if (testMeshFormat == "mesh") {
+        Th=readmesh3("top-ii-vol-mesh_"+mpirank+".mesh");
+    }
+    else if (testMeshFormat == "msh") {
+        load "gmsh"
+        Th=gmshload3("top-ii-vol-mesh_"+mpirank+".msh");
+    }
 
     reconstructDmesh(Th)
 
@@ -26,7 +35,7 @@ macro def(u)u//
     Mat A;
     createMat(Th, A, Pk)
 
-    varf vPb(u, v) = intN(Th)(grad(u)' * grad(v)) /*+ intN(Th)(1e6*(x<.6)*(x>.4)*x*y*v)*/ + on(6, u = 15.0)+ on(3, u = 1.0);
+    varf vPb(u, v) = intN(Th)(grad(u)' * grad(v)) + on(6, u = 15.0)+ on(3, u = 1.0);
     real[int] rhs = vPb(0, Wh);
 
     set(A, sparams = "-ksp_type cg");
@@ -38,3 +47,4 @@ macro def(u)u//
     savevtk("vtk.vtu",Th,u,order=fforder, dataname = "u");
     saveDmesh(Th, "saved-Dmesh");
 }
+
