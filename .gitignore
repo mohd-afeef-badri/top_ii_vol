@@ -6,6 +6,7 @@
 *.xyz
 *.mesh
 *.vtk
+*.pvtu
 *.o
 *.dat
 *.txt
