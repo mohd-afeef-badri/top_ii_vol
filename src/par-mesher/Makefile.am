@@ -32,7 +32,7 @@ SX1=105
 SY1=94
 
 check-local:
-	mpirun -n $(NP) ./topIIvol_ParMesher --xpoints 32 --ypoints 29 --zpoints $(PZ) --depth -3000  --in ./../../data/DEM_160m.xyz --out Parallel-out-mesh.mesh
+	mpirun --oversubscribe -n $(NP) ./topIIvol_ParMesher --xpoints 32 --ypoints 29 --zpoints $(PZ) --depth -3000  --in ./../../data/DEM_160m.xyz --out Parallel-out-mesh.mesh
 ##	mpirun -n $(NP) ./top-ii-vol-ParMesher --xpoints $(SX1) --ypoints $(SY1) --zpoints $(PZ) --depth -2000  --in out-coarse-striped.xyz --out Parallel-out-mesh.mesh
 	@echo ""
 

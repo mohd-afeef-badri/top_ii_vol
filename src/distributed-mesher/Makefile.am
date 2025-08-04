@@ -28,15 +28,15 @@ topIIvol_DistMesher.o: topIIvol_DistMesher.cpp ./../lib/TopiiVolPartAlgo1D2D3D.h
 #	@echo "" 
 
 check-local: topIIvol_DistMesher.o
-	mpirun -np $(NP) ./topIIvol_DistMesher --zpoints 50 --xpoints 32 --ypoints 29 --depth -1000 --out top-ii-vol-mesh  --in $(TEST_FILE)
-	mpirun -np $(NP) ./topIIvol_DistMesher --zpoints 50 --xpoints 32 --ypoints 29 --depth -1000 --out top-ii-vol-mesh  --in $(TEST_FILE) --partition_x 1 --partition_y 4
-	mpirun -np $(NP) ./topIIvol_DistMesher --zpoints 50 --xpoints 32 --ypoints 29 --depth -1000 --out top-ii-vol-mesh  --in $(TEST_FILE) --partition_x 4 --partition_y 1
-	mpirun -np $(NP) ./topIIvol_DistMesher --zpoints 50 --xpoints 32 --ypoints 29 --depth -1000 --out top-ii-vol-mesh  --in $(TEST_FILE) --partition_x 2 --partition_y 2
-	mpirun -np $(NP) ./topIIvol_DistMesher --zpoints 50 --xpoints 32 --ypoints 29 --depth -1000 --out top-ii-vol-mesh  --in $(TEST_FILE) --partition_x 2 --partition_z 2
-	mpirun -np $(NP) ./topIIvol_DistMesher --zpoints 50 --xpoints 32 --ypoints 29 --depth -1000 --out top-ii-vol-mesh  --in $(TEST_FILE) --partition_y 2 --partition_z 2
-	mpirun -np $(NP) ./topIIvol_DistMesher --zpoints 50 --xpoints 32 --ypoints 29 --depth -1000 --out top-ii-vol-mesh  --in $(TEST_FILE) --partition_x 1 --partition_z 4
-	mpirun -np $(NP) ./topIIvol_DistMesher --zpoints 50 --xpoints 32 --ypoints 29 --depth -1000 --out top-ii-vol-mesh  --in $(TEST_FILE) --partition_x 1 --partition_z 2 --partition_y 2
-	mpirun -np $(NP) ./topIIvol_DistMesher --zpoints 50 --xpoints 32 --ypoints 29 --depth -1000 --out top-ii-vol-mesh  --in $(TEST_FILE) --partition_x 2 --partition_y 2 --partition_z 1
+	mpirun --oversubscribe -np $(NP) ./topIIvol_DistMesher --zpoints 50 --xpoints 32 --ypoints 29 --depth -1000 --out top-ii-vol-mesh  --in $(TEST_FILE)
+	mpirun --oversubscribe -np $(NP) ./topIIvol_DistMesher --zpoints 50 --xpoints 32 --ypoints 29 --depth -1000 --out top-ii-vol-mesh  --in $(TEST_FILE) --partition_x 1 --partition_y 4
+	mpirun --oversubscribe -np $(NP) ./topIIvol_DistMesher --zpoints 50 --xpoints 32 --ypoints 29 --depth -1000 --out top-ii-vol-mesh  --in $(TEST_FILE) --partition_x 4 --partition_y 1
+	mpirun --oversubscribe -np $(NP) ./topIIvol_DistMesher --zpoints 50 --xpoints 32 --ypoints 29 --depth -1000 --out top-ii-vol-mesh  --in $(TEST_FILE) --partition_x 2 --partition_y 2
+	mpirun --oversubscribe -np $(NP) ./topIIvol_DistMesher --zpoints 50 --xpoints 32 --ypoints 29 --depth -1000 --out top-ii-vol-mesh  --in $(TEST_FILE) --partition_x 2 --partition_z 2
+	mpirun --oversubscribe -np $(NP) ./topIIvol_DistMesher --zpoints 50 --xpoints 32 --ypoints 29 --depth -1000 --out top-ii-vol-mesh  --in $(TEST_FILE) --partition_y 2 --partition_z 2
+	mpirun --oversubscribe -np $(NP) ./topIIvol_DistMesher --zpoints 50 --xpoints 32 --ypoints 29 --depth -1000 --out top-ii-vol-mesh  --in $(TEST_FILE) --partition_x 1 --partition_z 4
+	mpirun --oversubscribe -np $(NP) ./topIIvol_DistMesher --zpoints 50 --xpoints 32 --ypoints 29 --depth -1000 --out top-ii-vol-mesh  --in $(TEST_FILE) --partition_x 1 --partition_z 2 --partition_y 2
+	mpirun --oversubscribe -np $(NP) ./topIIvol_DistMesher --zpoints 50 --xpoints 32 --ypoints 29 --depth -1000 --out top-ii-vol-mesh  --in $(TEST_FILE) --partition_x 2 --partition_y 2 --partition_z 1
 	@echo ""
 
 test-freefem: ./../../test/reconstruct.edp
