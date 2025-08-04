@@ -30,7 +30,7 @@ class partPointCloud_Op : public E_F0mps
 public:
     Expression filename			;
 
-    static const int n_name_param = 8		;
+    static const int n_name_param = 9		;
     static basicAC_F0::name_and_type name_param[]	;
     Expression nargs[n_name_param]			;
 
@@ -58,7 +58,8 @@ basicAC_F0::name_and_type partPointCloud_Op<K>::name_param[] =
     {"zdepth", &typeid(double)},       
     {"partx"  , &typeid(long)},
     {"party"  , &typeid(long)},    
-    {"partz"  , &typeid(long)}
+    {"partz"  , &typeid(long)},
+    {"format", &typeid(std::string*)}
 };
 
 
@@ -91,6 +92,7 @@ AnyType partPointCloud_Op<K>::operator()(Stack stack) const
     int     NpX        = nargs[5] ? GetAny<long>((*nargs[5])(stack)) : -1;
     int     NpY        = nargs[6] ? GetAny<long>((*nargs[6])(stack)) : -1;
     int     NpZ        = nargs[7] ? GetAny<long>((*nargs[7])(stack)) : -1;        
+    string* meshtype   = nargs[8] ? GetAny<std::string*>((*nargs[8])(stack)) : NULL;
 
 //    cout << " Px "<< pntx << " py  "<<pnty  << " Name input "<< *inputfile << " Name output "<< *outputfile << endl;
 
@@ -136,7 +138,7 @@ class meshPointCloud_Op : public E_F0mps
 public:
     Expression filename			;
 
-    static const int n_name_param = 6		;
+    static const int n_name_param = 7		;
     static basicAC_F0::name_and_type name_param[]	;
     Expression nargs[n_name_param]			;
 
@@ -162,7 +164,8 @@ basicAC_F0::name_and_type meshPointCloud_Op<K>::name_param[] =
     {"zdepth", &typeid(double)},
     {"partx"  , &typeid(long)},
     {"party"  , &typeid(long)},    
-    {"partz"  , &typeid(long)}
+    {"partz"  , &typeid(long)},
+    {"format", &typeid(std::string*)}
 };
 
 
@@ -191,7 +194,9 @@ AnyType meshPointCloud_Op<K>::operator()(Stack stack) const
     double  zmax       = nargs[2] ? GetAny<double>((*nargs[2])(stack)) : -1.;
     int     NpX        = nargs[3] ? GetAny<long>((*nargs[3])(stack)) : -1;
     int     NpY        = nargs[4] ? GetAny<long>((*nargs[4])(stack)) : -1;
-    int     NpZ        = nargs[5] ? GetAny<long>((*nargs[5])(stack)) : -1;    
+    int     NpZ        = nargs[5] ? GetAny<long>((*nargs[5])(stack)) : -1;
+    string* meshtype   = nargs[6] ? GetAny<std::string*>((*nargs[6])(stack)) : NULL;
+  
 
 //    string* outputfile= GetAny<string*>((*outname)(stack))	;
 //    int     pntz      = GetAny<long>((*ptz)(stack))	        ;

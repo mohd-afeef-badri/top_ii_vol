@@ -55,9 +55,11 @@ int main(int argc, char **argv)
 
     string *inputfile  = new string();
     string *outputfile = new string();
+    string *meshtype = new string();
 
     *inputfile  = "./../../data/DEM_160m.xyz";
     *outputfile = "point-cloud-strip";
+    *meshtype = "mesh";
 
 //-----------------------------------------------------------------------------------//
 //---- Input Parameters -----
@@ -133,6 +135,9 @@ int main(int argc, char **argv)
 
             if(!strcmp(argv[i], "--in"))
                 *inputfile = argv[i+1];
+
+            if(!strcmp(argv[i], "--format"))
+                *meshtype = argv[i+1];
                 
         }
 
